@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,18 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.App {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+}
+
+.productList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.soldOut {
+  background-color: blue;
 }

@@ -1,23 +1,202 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Basket from "./Basket";
+import Navigation from "./Nav";
+import ProductList from "./ProductList";
+
+import { useState, useEffect } from "react";
 
 function App() {
+  // const products = [
+  //   {
+  //     id: 1163,
+  //     gender: "Men",
+  //     category: "Apparel",
+  //     subcategory: "Topwear",
+  //     articletype: "Tshirts",
+  //     season: "Summer",
+  //     productionyear: 2011,
+  //     usagetype: "Sports",
+  //     productdisplayname: "Sahara Team India Fanwear Round Neck Jersey",
+  //     price: 895,
+  //     discount: null,
+  //     brandname: "Nike",
+  //     soldout: 0,
+  //   },
+  //   {
+  //     id: 1164,
+  //     gender: "Men",
+  //     category: "Apparel",
+  //     subcategory: "Topwear",
+  //     articletype: "Tshirts",
+  //     season: "Winter",
+  //     productionyear: 2015,
+  //     usagetype: "Sports",
+  //     productdisplayname: "Blue T20 Indian Cricket Jersey",
+  //     price: 1595,
+  //     discount: 28,
+  //     brandname: "Nike",
+  //     soldout: 1,
+  //   },
+  //   {
+  //     id: 1165,
+  //     gender: "Men",
+  //     category: "Apparel",
+  //     subcategory: "Topwear",
+  //     articletype: "Tshirts",
+  //     season: "Summer",
+  //     productionyear: 2013,
+  //     usagetype: "Sports",
+  //     productdisplayname: "Mean Team India Cricket Jersey",
+  //     price: 2495,
+  //     discount: 45,
+  //     brandname: "Nike",
+  //     soldout: 0,
+  //   },
+  //   {
+  //     id: 1525,
+  //     gender: "Unisex",
+  //     category: "Accessories",
+  //     subcategory: "Bags",
+  //     articletype: "Backpacks",
+  //     season: "Fall",
+  //     productionyear: 2010,
+  //     usagetype: "Casual",
+  //     productdisplayname: "Deck Navy Blue Backpack",
+  //     price: 1299,
+  //     discount: 55,
+  //     brandname: "Puma",
+  //     soldout: 0,
+  //   },
+  //   {
+  //     id: 1526,
+  //     gender: "Unisex",
+  //     category: "Accessories",
+  //     subcategory: "Bags",
+  //     articletype: "Backpacks",
+  //     season: "Fall",
+  //     productionyear: 2010,
+  //     usagetype: "Sports",
+  //     productdisplayname: "Big Cat Backpack Black",
+  //     price: 1299,
+  //     discount: null,
+  //     brandname: "Puma",
+  //     soldout: 0,
+  //   },
+  //   {
+  //     id: 1528,
+  //     gender: "Men",
+  //     category: "Apparel",
+  //     subcategory: "Topwear",
+  //     articletype: "Jackets",
+  //     season: "Fall",
+  //     productionyear: 2010,
+  //     usagetype: "Sports",
+  //     productdisplayname: "Black Fleece Jacket",
+  //     price: 3999,
+  //     discount: 49,
+  //     brandname: "Puma",
+  //     soldout: 0,
+  //   },
+  //   {
+  //     id: 1529,
+  //     gender: "Men",
+  //     category: "Apparel",
+  //     subcategory: "Topwear",
+  //     articletype: "Tshirts",
+  //     season: "Fall",
+  //     productionyear: 2010,
+  //     usagetype: "Casual",
+  //     productdisplayname: "Tee",
+  //     price: 1899,
+  //     discount: null,
+  //     brandname: "Puma",
+  //     soldout: 0,
+  //   },
+  //   {
+  //     id: 1530,
+  //     gender: "Men",
+  //     category: "Apparel",
+  //     subcategory: "Topwear",
+  //     articletype: "Jackets",
+  //     season: "Fall",
+  //     productionyear: 2010,
+  //     usagetype: "Sports",
+  //     productdisplayname: "Track Jacket",
+  //     price: 4299,
+  //     discount: 57,
+  //     brandname: "Puma",
+  //     soldout: 1,
+  //   },
+  //   {
+  //     id: 1531,
+  //     gender: "Men",
+  //     category: "Apparel",
+  //     subcategory: "Topwear",
+  //     articletype: "Tshirts",
+  //     season: "Fall",
+  //     productionyear: 2010,
+  //     usagetype: "Casual",
+  //     productdisplayname: "Grey Solid Round Neck T-Shirt",
+  //     price: 799,
+  //     discount: null,
+  //     brandname: "Puma",
+  //     soldout: 0,
+  //   },
+  //   {
+  //     id: 1532,
+  //     gender: "Men",
+  //     category: "Apparel",
+  //     subcategory: "Topwear",
+  //     articletype: "Tshirts",
+  //     season: "Fall",
+  //     productionyear: 2010,
+  //     usagetype: "Casual",
+  //     productdisplayname: "Grey Leaping Cat T-shirt",
+  //     price: 899,
+  //     discount: null,
+  //     brandname: "Puma",
+  //     soldout: 0,
+  //   },
+  // ];
+  let basket = [];
+
+  const [products, setProducts] = useState([]);
+
+  const link = "https://kea-alt-del.dk/t7/api/products?limit=50";
+  useEffect(() => {
+    fetch(link)
+      .then((res) => res.json())
+      .then(setProducts);
+  }, []);
+
+  function addProduct() {
+    setProducts((addItem) => [
+      ...addItem,
+      {
+        id: 6666,
+        gender: "Unisex",
+        category: "Apparel",
+        subcategory: "Topwear",
+        articletype: "Tshirts",
+        season: "Fall",
+        productionyear: 2010,
+        usagetype: "Casual",
+        productdisplayname: "Palm Angels T-shirt",
+        price: 10000,
+        discount: null,
+        brandname: "Palm Angels",
+        soldout: 0,
+      },
+    ]);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navigation />
+      <button onClick={addProduct}>Add Product</button>
+      <ProductList products={products} />
+      <Basket basket={basket} />
     </div>
   );
 }
