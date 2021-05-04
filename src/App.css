@@ -39,14 +39,13 @@
 
 .App {
   display: grid;
-  grid-template-columns: 1fr 200px;
+  /* grid-template-columns: 1fr 200px; */
 }
-
-.productList {
+.Nav {
+  grid-column: 1/-1;
+}
+.ProductList {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-}
-
-.soldOut {
-  background-color: blue;
+  gap: 1rem;
 }

@@ -162,6 +162,7 @@ function App() {
   let basket = [];
 
   const [products, setProducts] = useState([]);
+  const [sortKey, setSortKey] = useState("price");
 
   const link = "https://kea-alt-del.dk/t7/api/products?limit=50";
   useEffect(() => {
@@ -191,11 +192,16 @@ function App() {
     ]);
   }
 
+  const copy = [...products];
+  copy.sort((a, b) => a[sortKey] > b[sortKey]);
+
   return (
     <div className="App">
       <Navigation />
-      <button onClick={addProduct}>Add Product</button>
-      <ProductList products={products} />
+      <button onClick={() => setSortKey("productdisplayname")}>Sort by Name</button>
+      <button onClick={() => setSortKey("price")}>Sort by Price</button>
+      {/* <button onClick={addProduct}>Add Product</button> */}
+      <ProductList products={copy} />
       <Basket basket={basket} />
     </div>
   );
